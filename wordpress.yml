@@ -1,0 +1,22 @@
+---
+- name: LAMP Install
+  hosts: node1
+  become: true
+  vars_files:
+    var.yml
+  tasks:
+  roles:
+    - name: geerlingguy.apache
+      tags: apache
+
+    - name: geerlingguy.php-versions
+      tags: php-versions
+
+    - name: geerlingguy.php
+      tags: php
+
+    - name: geerlingguy.mysql
+      tags: mysql
+
+    - name: oefenweb.wordpress
+      tags: wordpress

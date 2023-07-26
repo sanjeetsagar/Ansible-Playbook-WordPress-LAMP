@@ -1,0 +1,8 @@
+---
+- src: geerlingguy.php-versions
+- src: geerlingguy.apache 
+- src: geerlingguy.php
+- src: geerlingguy.mysql
+- src: geerlingguy.php-mysql
+- src: geerlingguy.composer
+- src: oefenweb.wordpress

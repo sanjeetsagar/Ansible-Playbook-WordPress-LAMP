@@ -1,0 +1,90 @@
+######### PHP Version (geerlingguy.php-versions) #########
+php_version: '8.2'
+
+######### WordPress Common Settings #########
+domain: "node1.test"
+path: "/var/www"
+wp_admin_name: admin
+wp_admin_email: root@localhost.test
+wp_admin_password: 'Passw0rd@321'
+
+
+######### MySQL Database #########
+mysql_host: "localhost"
+mysql_root_password: "Nev$^@@3211"
+mysql_username: "mysqlUser21"
+mysql_password: "{{ mysql_root_password }}"
+mysql_db: "{{ mysql_username }}"
+
+
+######### VirtualHost (geerlingguy.apache) #########
+apache_remove_default_vhost: true
+apache_create_vhosts: true
+apache_vhosts_filename: "{{ domain }}.conf"
+# apache_vhosts_template: "vhosts.conf.j2"
+apache_vhosts:
+  # Additional optional properties: 'serveradmin, serveralias, extra_parameters'.
+  - servername: "{{ domain }}"
+    documentroot: "{{ path }}"
+    serveralias: "www.{{ domain }}" 
+
+
+######### PHP Packages (geerlingguy.php) #########
+php_packages:
+  - php
+  - php-gd
+  - php-mbstring
+  - php-xml
+  - php-json
+  - php-fpm
+  - php-mysql
+  - php-redis
+  - libapache2-mod-php
+  - php-apcu
+  - curl
+  - php-curl
+  - zip
+  - unzip
+  - php-cli
+  - php-bcmath
+
+######### MySQL #########
+# mysql_packages:
+#   - mariadb-client
+#   - mariadb-server
+    # - mysql
+    # - mysql-server
+
+######### MySQL (geerlingguy.mysql) #########
+mysql_databases:
+  - name: "{{ mysql_db }}"
+    encoding: utf8mb4
+    collation: utf8mb4_general_ci
+mysql_users:
+  - name: "{{ mysql_username }}"
+    host: "%"
+    password: "{{ mysql_password }}"
+    priv: "{{ mysql_db }}.*:ALL"
+
+######### WordPress (oefenweb.wordpress) #########
+wordpress_installs:
+  - name: wordpress
+    dbname: "{{ mysql_db }}"
+    dbuser: "{{ mysql_username }}"
+    dbpass: "{{ mysql_password }}"
+    dbhost: "{{ mysql_host }}"
+    path: "{{ path }}"
+    url: "http://{{ domain }}"
+    title: wordpress
+    admin_name: "{{ wp_admin_name }}"
+    admin_email: "{{ wp_admin_email }}"
+    admin_password: "{{ wp_admin_password }}"
+    themes:
+      - name: twentytwentythree
+        activate: true
+    plugins:
+      - name: contact-form-7
+        activate: false
+    users: {}
+    options: []
+    queries: []

@@ -1,0 +1,14 @@
+master ansible_host=192.168.33.31
+node1 ansible_host=192.168.33.32
+node2 ansible_host=192.168.33.33
+
+[all:vars]
+ansible_user=vagrant
+ansible_port=22
+
+[controller]
+control ansible_host=192.168.33.31
+
+[web]
+node1 ansible_host=192.168.33.32
+node2 ansible_host=192.168.33.33
