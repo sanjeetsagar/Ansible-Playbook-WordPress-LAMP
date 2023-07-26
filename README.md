@@ -1,4 +1,4 @@
-# Ansible WordPress for a LEMP server
+# Ansible WordPress for a LAMP server
 
 ## Background
 
